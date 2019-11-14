@@ -1,0 +1,8 @@
+kubectl apply -f https://raw.githubusercontent.com/codyde/kubecon-contour-lab/master/pods-and-services.yaml
+wget https://raw.githubusercontent.com/codyde/kubecon-contour-lab/master/contour-final-state.yaml
+sed -i 's/REPLACEME/'"$externalfqdn"'/g' contour-route.yaml
+kubectl apply -f contour-final-state.yaml
+kubectl apply -f https://gist.githubusercontent.com/codyde/222ad38e6331181aac41ef7df643d6bd/raw/b322be100ecd3b32f23efe6a5dca0e5081e911a2/minio-nopvc.yaml
+wget https://gist.githubusercontent.com/codyde/fc61f8dd77830e67db3a72feea628216/raw/1d5d522652bd96fa2cd94f13da1236298e92bdfb/minio-service.yaml
+sed -i 's/REPLACEME/'"$externalip"'/g' minio-service.yaml
+kubectl apply -f minio-service.yaml
