@@ -7,7 +7,6 @@ export externalip=$(curl -s http://169.254.169.254/latest/meta-data/public-ipv4)
 export externalfqdn=$(curl -s http://169.254.169.254/latest/meta-data/public-hostname)
 sed -i 's/REPLACEME/'"$externalip"'/g' envoy-update.yaml
 kubectl apply -f envoy-update.yaml --force
-sudo apt install -y awscli
 kubectl apply -f https://raw.githubusercontent.com/codyde/kubecon-contour-lab/master/pods-and-services.yaml
 wget https://raw.githubusercontent.com/codyde/kubecon-contour-lab/master/contour-final-state.yaml
 sed -i 's/REPLACEME/'"$externalfqdn"'/g' contour-final-state.yaml
@@ -16,3 +15,5 @@ kubectl apply -f https://gist.githubusercontent.com/codyde/222ad38e6331181aac41e
 wget https://gist.githubusercontent.com/codyde/fc61f8dd77830e67db3a72feea628216/raw/1d5d522652bd96fa2cd94f13da1236298e92bdfb/minio-service.yaml
 sed -i 's/REPLACEME/'"$externalip"'/g' minio-service.yaml
 kubectl apply -f minio-service.yaml
+sudo apt install -y awscli
+
